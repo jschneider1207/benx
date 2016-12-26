@@ -77,7 +77,7 @@ defimpl Benx.Encoder, for: Map do
   alias Benx.Encoder
   def encode(term) do
     term
-    |> Enum.sort_by(fn {k, v} -> k end)
+    |> Enum.sort_by(fn {k, _v} -> k end)
     |> do_encode()
   end
 
