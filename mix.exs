@@ -47,8 +47,7 @@ defmodule Benx.Mixfile do
   end
 
   defp package do
-    [# These are the default files included in the package
-     name: :postgrex,
+    [name: :benx,
      files: ["lib", "mix.exs", "README*", "LICENSE*"],
      maintainers: ["Sam Schneider"],
      licenses: ["MIT"],
