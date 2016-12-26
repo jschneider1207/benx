@@ -17,7 +17,7 @@ defmodule Benx.Decoder do
     do
       {:ok, term}
     else
-      {:ok, _term, rest, pos} ->
+      {:ok, _term, _rest, pos} ->
         {:error, "unable to determine type", pos}
       err ->
         err
@@ -80,7 +80,7 @@ defmodule Benx.Decoder do
     with {:ok, map, rest, new_pos} <- decode_map(rem, pos + 1),
          do: decode_list(rest, new_pos, [map|acc])
   end
-  defp decode_list([], pos, acc) do
+  defp decode_list([], pos, _acc) do
     {:error, "expected 'e' for end of list or for list to continue", pos}
   end
   defp decode_list(data, pos, acc) do
@@ -114,7 +114,7 @@ defmodule Benx.Decoder do
   end
   defp decode_string_length([], pos, acc) do
     start_pos = pos - length(acc)
-    {:error, "unable to determine type", pos}
+    {:error, "unable to determine type", start_pos}
   end
   defp decode_string_length([digit|rem], pos, acc) do
     decode_string_length(rem, pos + 1, [digit|acc])
@@ -130,7 +130,7 @@ defmodule Benx.Decoder do
   end
   defp decode_string([], length, pos, acc) do
     start_pos = pos - length(acc)
-    {:error, "expected #{length} more character(s) for string", pos}
+    {:error, "expected #{length} more character(s) for string", start_pos}
   end
   defp decode_string([char|rem], length, pos, acc) do
     decode_string(rem, length - 1, pos + 1, [char|acc])
