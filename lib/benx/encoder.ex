@@ -11,8 +11,8 @@ defprotocol Benx.Encoder do
     String.t |
     atom |
     integer |
-    [encodable] |
-    %{required(String.t | atom) => encodable} |
+    [t] |
+    %{required(String.t | atom) => t} |
     Range.t |
     Stream.t
 
