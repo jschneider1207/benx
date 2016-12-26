@@ -9,7 +9,7 @@ defmodule Benx.Decoder do
   Decodes a Bencoded iolist.
   """
   @spec decode(iodata) ::
-    {:ok, Benx.Encoder.encodable} |
+    {:ok, Benx.Encoder.t} |
     {:error, String.t, integer}
   def decode(data) do
     with flattened = :lists.flatten(data),

@@ -7,7 +7,7 @@ defprotocol Benx.Encoder do
   @typedoc """
   Terms that can be encoded.
   """
-  @type encodable ::
+  @type t ::
     String.t |
     atom |
     integer |
