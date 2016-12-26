@@ -11,6 +11,8 @@ defmodule Benx.Mixfile do
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     description: description,
+     package: package,
      deps: deps]
   end
 
@@ -36,5 +38,20 @@ defmodule Benx.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     []
+  end
+
+  defp description do
+    """
+    A fast parser for the Bencoding spec.
+    """
+  end
+
+  defp package do
+    [# These are the default files included in the package
+     name: :postgrex,
+     files: ["lib", "mix.exs", "README*", "LICENSE*"],
+     maintainers: ["Sam Schneider"],
+     licenses: ["MIT"],
+     links: %{github: "https://github.com/sschneider1207/benx"}]
   end
 end
