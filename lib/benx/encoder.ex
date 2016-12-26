@@ -31,7 +31,7 @@ end
 
 defimpl Benx.Encoder, for: BitString do
   def encode(term) do
-    charlist = to_charlist(term)
+    charlist = :erlang.binary_to_list(term)
     length =
       charlist
       |> length()
