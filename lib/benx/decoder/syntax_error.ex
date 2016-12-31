@@ -5,6 +5,8 @@ defmodule Benx.Decoder.SyntaxError do
 
   defexception [:message, :position]
 
+  @type t :: %__MODULE__{}
+
   def exception(opts) do
     position = opts[:position]
     message = opts[:message]

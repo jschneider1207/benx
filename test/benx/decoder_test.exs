@@ -15,7 +15,7 @@ defmodule Benx.DecoderTest do
   end
 
   test "negative 0 syntax error" do
-    assert match?({:error, _reason, _pos}, Decoder.decode('i-0e'))
+    assert match?({:error, _reason}, Decoder.decode('i-0e'))
   end
 
   test "decode string" do
@@ -31,7 +31,7 @@ defmodule Benx.DecoderTest do
   end
 
   test "string length mismatch syntax error" do
-    assert match?({:error, _reason, _pos}, Decoder.decode('4:map'))
+    assert match?({:error, _reason}, Decoder.decode('4:map'))
   end
 
   test "decode empty list" do
@@ -43,7 +43,7 @@ defmodule Benx.DecoderTest do
   end
 
   test "non-ending list syntax error" do
-    assert match?({:error, _reason, _pos}, Decoder.decode('li1e'))
+    assert match?({:error, _reason}, Decoder.decode('li1e'))
   end
 
   test "decode empty map" do
@@ -56,10 +56,10 @@ defmodule Benx.DecoderTest do
   end
 
   test "non-ending map syntax error" do
-    assert match?({:error, _reason, _pos}, Decoder.decode('d3:mapi1e'))
+    assert match?({:error, _reason}, Decoder.decode('d3:mapi1e'))
   end
 
   test "non-string map key syntax error" do
-    assert match?({:error, _reason, _pos}, Decoder.decode('di1e'))
+    assert match?({:error, _reason}, Decoder.decode('di1e'))
   end
 end

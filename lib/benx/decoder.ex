@@ -10,7 +10,7 @@ defmodule Benx.Decoder do
   """
   @spec decode(iodata) ::
     {:ok, Benx.Encoder.t} |
-    {:error, String.t, integer}
+    {:error, SyntaxError.t}
   def decode(data) do
     with flattened = :lists.flatten(data),
          {:ok, term, [], _pos} <- do_decode(flattened)
@@ -18,9 +18,9 @@ defmodule Benx.Decoder do
       {:ok, term}
     else
       {:ok, _term, _rest, pos} ->
-        {:error, "unable to determine type", pos}
-      err ->
-        err
+        {:error, SyntaxError.exception(message: "unable to determine type", position: pos)}
+      {:error, reason, pos} ->
+        {:error, SyntaxError.exception(message: reason, position: pos)}
     end
   end
 
@@ -31,7 +31,7 @@ defmodule Benx.Decoder do
   def decode!(data) do
     case decode(data) do
       {:ok, term} -> term
-      {:error, reason, pos} -> raise SyntaxError, message: reason, position: pos
+      {:error, err} -> raise err
     end
   end
 
